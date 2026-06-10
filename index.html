@@ -1,1 +1,206 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Break Timer</title>
 
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#1e293b;
+    color:white;
+    transition:0.5s;
+}
+
+.container{
+    text-align:center;
+}
+
+.mode{
+    font-size:2rem;
+    margin-bottom:20px;
+}
+
+.timer{
+    font-size:8rem;
+    font-weight:bold;
+    letter-spacing:5px;
+}
+
+.buttons{
+    margin-top:30px;
+}
+
+button{
+    padding:12px 24px;
+    margin:5px;
+    border:none;
+    border-radius:12px;
+    font-size:1rem;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.start{
+    background:#22c55e;
+    color:white;
+}
+
+.pause{
+    background:#f59e0b;
+    color:white;
+}
+
+.reset{
+    background:#ef4444;
+    color:white;
+}
+
+.study{
+    background:#1e293b;
+}
+
+.break{
+    background:#166534;
+}
+
+.info{
+    margin-top:20px;
+    opacity:0.8;
+}
+</style>
+</head>
+
+<body class="study">
+
+<div class="container">
+
+    <div class="mode" id="mode">
+        📚 เวลาอ่านหนังสือ
+    </div>
+
+    <div class="timer" id="timer">
+        25:00
+    </div>
+
+    <div class="buttons">
+        <button class="start" onclick="startTimer()">เริ่ม</button>
+        <button class="pause" onclick="pauseTimer()">หยุด</button>
+        <button class="reset" onclick="resetTimer()">รีเซ็ต</button>
+    </div>
+
+    <div class="info">
+        อ่าน 25 นาที → พักสายตา 5 นาที
+    </div>
+
+</div>
+
+<script>
+
+let studyTime = 25 * 60;
+let breakTime = 5 * 60;
+
+let currentTime = studyTime;
+let isRunning = false;
+let isStudy = true;
+let interval;
+
+const timerEl = document.getElementById("timer");
+const modeEl = document.getElementById("mode");
+
+function updateDisplay(){
+    let min = Math.floor(currentTime / 60);
+    let sec = currentTime % 60;
+
+    timerEl.textContent =
+        String(min).padStart(2,'0') + ":" +
+        String(sec).padStart(2,'0');
+}
+
+function startTimer(){
+
+    if(isRunning) return;
+
+    isRunning = true;
+
+    interval = setInterval(() => {
+
+        currentTime--;
+
+        updateDisplay();
+
+        if(currentTime < 0){
+
+            clearInterval(interval);
+
+            if(isStudy){
+
+                alert("พักสายตา 5 นาที 👀");
+
+                isStudy = false;
+                currentTime = breakTime;
+
+                modeEl.textContent = "👀 พักสายตา";
+                document.body.className = "break";
+
+            }else{
+
+                alert("กลับมาอ่านหนังสือ 📚");
+
+                isStudy = true;
+                currentTime = studyTime;
+
+                modeEl.textContent = "📚 เวลาอ่านหนังสือ";
+                document.body.className = "study";
+            }
+
+            updateDisplay();
+            isRunning = false;
+
+            startTimer();
+        }
+
+    },1000);
+}
+
+function pauseTimer(){
+    clearInterval(interval);
+    isRunning = false;
+}
+
+function resetTimer(){
+
+    clearInterval(interval);
+
+    isRunning = false;
+    isStudy = true;
+
+    currentTime = studyTime;
+
+    document.body.className = "study";
+    modeEl.textContent = "📚 เวลาอ่านหนังสือ";
+
+    updateDisplay();
+}
+
+updateDisplay();
+
+</script>
+
+</body>
+</html>
