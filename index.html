@@ -12,7 +12,18 @@
     box-sizing:border-box;
     font-family:'Segoe UI',sans-serif;
 }
+.level-select{
+    margin-bottom:30px;
+}
 
+.level-select button{
+    margin:5px;
+    padding:10px 15px;
+    border-radius:10px;
+}
+
+
+    
 body{
     height:100vh;
     display:flex;
@@ -148,6 +159,47 @@ function updateDisplay(){
     timerEl.textContent =
         String(min).padStart(2,'0') + ":" +
         String(sec).padStart(2,'0');
+}
+
+
+    function setLevel(level){
+
+    clearInterval(interval);
+    isRunning = false;
+
+    switch(level){
+
+        case 'primary':
+            studyTime = 60 * 60;
+            breakTime = 10 * 60;
+            modeEl.textContent =
+            "🟢 ปฐมศึกษา (1 ชั่วโมง)";
+            break;
+
+        case 'secondary':
+            studyTime = 2 * 60 * 60;
+            breakTime = 15 * 60;
+            modeEl.textContent =
+            "🔵 มัธยมศึกษา (2 ชั่วโมง)";
+            break;
+
+        case 'university':
+            studyTime = 3 * 60 * 60;
+            breakTime = 20 * 60;
+            modeEl.textContent =
+            "🟣 มหาวิทยาลัย (3 ชั่วโมง)";
+            break;
+
+        case 'doctor':
+            studyTime = 4 * 60 * 60;
+            breakTime = 30 * 60;
+            modeEl.textContent =
+            "🔴 ดอกเตอร์ (4 ชั่วโมง)";
+            break;
+    }
+
+    currentTime = studyTime;
+    updateDisplay();
 }
 
 function startTimer(){
