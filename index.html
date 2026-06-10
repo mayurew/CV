@@ -107,19 +107,19 @@ button:hover{
 <div class="level-select">
 
     <button onclick="setLevel('primary')">
-        🟢 ปฐมศึกษา
+         ปฐมศึกษา
     </button>
 
     <button onclick="setLevel('secondary')">
-        🔵 มัธยม
+        มัธยม
     </button>
 
     <button onclick="setLevel('university')">
-        🟣 มหาวิทยาลัย
+       มหาวิทยาลัย
     </button>
 
     <button onclick="setLevel('doctor')">
-        🔴 ดอกเตอร์
+       ดอกเตอร์
     </button>
 
 </div>
@@ -175,28 +175,28 @@ function updateDisplay(){
             studyTime = 60 * 60;
             breakTime = 10 * 60;
             modeEl.textContent =
-            "🟢 ปฐมศึกษา (1 ชั่วโมง)";
+            "ปฐมศึกษา (1 ชั่วโมง)";
             break;
 
         case 'secondary':
             studyTime = 2 * 60 * 60;
             breakTime = 15 * 60;
             modeEl.textContent =
-            "🔵 มัธยมศึกษา (2 ชั่วโมง)";
+            "มัธยมศึกษา (2 ชั่วโมง)";
             break;
 
         case 'university':
             studyTime = 3 * 60 * 60;
             breakTime = 20 * 60;
             modeEl.textContent =
-            "🟣 มหาวิทยาลัย (3 ชั่วโมง)";
+            "มหาวิทยาลัย (3 ชั่วโมง)";
             break;
 
         case 'doctor':
             studyTime = 4 * 60 * 60;
             breakTime = 30 * 60;
             modeEl.textContent =
-            "🔴 ดอกเตอร์ (4 ชั่วโมง)";
+            "ดอกเตอร์ (4 ชั่วโมง)";
             break;
     }
 
